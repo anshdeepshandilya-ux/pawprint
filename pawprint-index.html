@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pawprint – Discover, compare and book pet services</title>
+<meta name="description" content="Discover, compare and book trusted pet services in Mumbai, Bengaluru, Delhi, Gurugram and Noida.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbfaff;--tx:#26304a;--mut:#667089;--card:#fff;--line:#e4e6f2;--blue:#dfe9f8;--lav:#e8e2f7;--grn:#ddf0e4;--pri:#3f5aa6;--on:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root{--bg:#161a2b;--tx:#e8eaf5;--mut:#a2a9c2;--card:#1f2540;--line:#2f3659;--blue:#26335c;--lav:#2d2850;--grn:#1f3a30;--pri:#9db4f2;--on:#12162a}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 'DM Sans',system-ui,sans-serif}
+h1,h2,h3{font-family:'DM Serif Display',Georgia,serif;font-weight:400;margin:0;line-height:1.15}
+button,input,select,textarea{font:inherit;color:inherit}a{color:var(--pri)}:focus-visible{outline:3px solid var(--pri);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 18px}
+header{background:var(--bg);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+header .wrap{display:flex;align-items:center;gap:10px;min-height:60px;flex-wrap:wrap}
+.logo{font:400 24px 'DM Serif Display';margin-right:auto;text-decoration:none;color:var(--tx)}
+nav{display:flex;gap:2px;flex-wrap:wrap;align-items:center}
+nav a,nav select{background:none;border:0;padding:8px 10px;border-radius:99px;cursor:pointer;text-decoration:none;color:var(--tx)}
+nav a:hover,nav a.on{background:var(--lav)}nav select{background:var(--blue)}
+.btn{background:var(--pri);color:var(--on);border:0;border-radius:99px;padding:10px 18px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.o{background:none;border:1.5px solid var(--pri);color:var(--pri)}.btn.s{padding:6px 12px;font-size:14px}.btn:disabled{opacity:.5;cursor:not-allowed}
+.hero{background:linear-gradient(135deg,var(--blue),var(--lav) 60%,var(--grn));padding:48px 0 56px}
+.hero h1{font-size:clamp(34px,6vw,58px);max-width:13em}.hero p{font-size:18px;color:var(--mut);margin:10px 0 0}
+.search{display:grid;grid-template-columns:auto 1fr auto;gap:6px;background:var(--card);padding:8px;border-radius:22px;margin-top:22px;max-width:760px}
+.search select,.search input{border:0;background:transparent;padding:12px;border-radius:12px;min-width:0}
+@media(max-width:600px){.search{grid-template-columns:1fr}}
+section{padding:30px 0}.sh{display:flex;justify-content:space-between;align-items:end;margin-bottom:14px;gap:10px;flex-wrap:wrap}.sh h2{font-size:28px}
+.cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.cat{border-radius:22px;padding:18px;text-decoration:none;color:var(--tx);display:block}
+.cat:nth-child(3n+1){background:var(--blue)}.cat:nth-child(3n+2){background:var(--lav)}.cat:nth-child(3n){background:var(--grn)}
+.cat b{display:block;font-size:28px}.cat span{font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;display:flex;flex-direction:column;gap:8px}.card h3{font-size:20px}
+.tag{display:inline-block;font-size:12px;padding:2px 10px;border-radius:99px;background:var(--blue);margin:0 4px 4px 0}.tag.w{background:#fdebc8;color:#5b3a00}.tag.v{background:var(--grn)}
+.mut{color:var(--mut);font-size:14px}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.filters select,.filters input[type=number],.filters input[type=search]{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:8px 10px}
+.filters label{display:flex;gap:6px;align-items:center;font-size:14px}
+.bar{position:sticky;bottom:0;background:var(--pri);color:var(--on);padding:12px 18px;display:none;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;z-index:4}.bar .btn{background:var(--on);color:var(--pri)}
+.modal{position:fixed;inset:0;background:rgba(10,12,30,.5);display:none;align-items:center;justify-content:center;z-index:20;padding:14px}.modal.on{display:flex}
+.sheet{background:var(--bg);border-radius:24px;max-width:700px;width:100%;max-height:90vh;overflow:auto;padding:24px;position:relative}
+.x{position:absolute;right:14px;top:10px;background:none;border:0;font-size:28px;cursor:pointer}
+table{width:100%;border-collapse:collapse;min-width:480px}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.scroll{overflow-x:auto}
+.f{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}.f input,.f select,.f textarea{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:10px}
+.err{color:#b3261e;font-size:14px;min-height:1em}.note{background:#fdebc8;color:#4d3300;border-radius:14px;padding:10px 14px;font-size:14px}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--pri);color:var(--on);padding:12px 20px;border-radius:99px;display:none;z-index:30;max-width:90vw}
+footer{padding:28px 0;color:var(--mut);font-size:14px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head><body>
+<header><div class="wrap"><a class="logo" href="/" data-link>🐾 Pawprint</a><nav id="nav"></nav></div></header>
+<main id="app"><p class="wrap">Loading…</p></main>
+<div id="bar" class="bar"></div>
+<div class="modal" id="modal"><div class="sheet" id="sheet" role="dialog" aria-modal="true"></div></div>
+<div id="toast" role="status"></div>
+<footer><div class="wrap">Listings are compiled from public web sources and are unverified until an admin verifies them. Ratings shown come only from reviews submitted on Pawprint. Pawprint does not manage or confirm appointments; booking is completed with the provider.</div></footer>
+<script>
+'use strict';
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const S={meta:{cities:[],categories:[]},user:null,city:localStorage.getItem('pp_city')||'delhi',cmp:JSON.parse(sessionStorage.getItem('pp_cmp')||'[]'),pos:null};
+const TOK=()=>localStorage.getItem('pp_token');
+async function api(p,o={}){const h={'Content-Type':'application/json'};if(TOK())h.Authorization='Bearer '+TOK();
+ let r;try{r=await fetch('/api'+p,{...o,headers:h,body:o.body?JSON.stringify(o.body):undefined})}catch{throw new Error('Network problem. Check your connection and try again.')}
+ const d=await r.json().catch(()=>({}));if(r.status===401&&TOK()&&!p.startsWith('/auth')){localStorage.removeItem('pp_token');S.user=null}
+ if(!r.ok)throw new Error(d.error||'Request failed');return d}
+const toast=m=>{const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',3200)};
+const cityName=s=>(S.meta.cities.find(c=>c.slug===s)||{}).name||s,catName=s=>(S.meta.categories.find(c=>c.slug===s)||{}).name||s;
+const saveCmp=()=>sessionStorage.setItem('pp_cmp',JSON.stringify(S.cmp));
+const CATI={groom:'✂️',vet:'🩺',board:'🏡',train:'🎾',sit:'🦮',shop:'🛍️',other:'📸'};
+const go=(u)=>{history.pushState({},'',u);route();scrollTo(0,0)};
+const view=h=>{$('#app').innerHTML=h};const loading=()=>view('<div class="wrap"><section><p class="mut">Loading…</p></section></div>');
+const errView=(m)=>view(`<div class="wrap"><section><div class="card"><h3>Something went wrong</h3><p>${esc(m)}</p><button class="btn s" data-act="reload">Try again</button></div></section></div>`);
+function nav(){const p=location.pathname;const a=(h,t)=>`<a href="${h}" data-link class="${p===h?'on':''}">${t}</a>`;
+ $('#nav').innerHTML=`<select aria-label="Select location" data-city>${S.meta.cities.map(c=>`<option value="${c.slug}" ${c.slug===S.city?'selected':''}>${esc(c.name)}</option>`).join('')}</select>`+a('/explore','Explore services')+a('/compare','Compare')+a('/about','About us')+a('/account',S.user?'My account':'Log in / Sign up')+a('/list-your-business','List your business')+(S.user?.role==='admin'?a('/admin','Admin'):'')}
+function bar(){const b=$('#bar');b.style.display=S.cmp.length?'flex':'none';b.innerHTML=`${S.cmp.length} selected <a class="btn s" href="/compare" data-link>Open comparison</a> <button class="btn s" data-act="clearcmp">Clear</button>`}
+const price=p=>p.starting_price==null?'Price not listed':p.starting_price===0?'Free':'From ₹'+p.starting_price;
+function badge(p){return p.verified?'<span class="tag v">✓ Verified</span>':'<span class="tag w">Unverified listing</span>'}
+function card(p){const on=S.cmp.some(c=>c.id===p.id);
+ return`<article class="card"><div>${badge(p)}<span class="tag">${esc(catName(p.category))}</span></div>
+<h3><a href="/p/${p.slug}" data-link style="text-decoration:none;color:inherit">${esc(p.name)}</a></h3>
+<div class="mut">${esc([p.locality,cityName(p.city)].filter(Boolean).join(', '))}${p.distance_km!=null?' · '+p.distance_km+' km':''}</div>
+<div>${p.rating?`★ ${p.rating} <span class="mut">(${p.review_count} review${p.review_count>1?'s':''})</span>`:'<span class="mut">No reviews yet</span>'}</div>
+<div class="mut">${esc(p.services.slice(0,4).join(', ')||'Services not listed')}</div><div><b>${price(p)}</b></div>${contactLine(p)}
+<div>${p.home_service?'<span class="tag v">Home service</span>':''}${p.emergency?'<span class="tag v">Emergency</span>':''}</div>
+<div class="row" style="margin-top:auto"><a class="btn s" href="/p/${p.slug}" data-link>View details</a><button class="btn s o" data-act="cmp" data-id="${p.id}" data-name="${esc(p.name)}" aria-pressed="${on}">${on?'✓ Added':'Compare'}</button>${bookBtn(p)}</div></article>`}
+const contactLine=p=>p.website?'':`<div class="mut">${p.phone?`📞 <a href="tel:${esc(p.phone.replace(/[^\d+]/g,''))}">${esc(p.phone)}</a> · `:''}<a href="${esc(p.maps_url)}" target="_blank" rel="noopener noreferrer">Google Maps</a></div>`;
+const bookBtn=p=>p.has_booking_link?`<a class="btn s" href="/go/${p.id}" target="_blank" rel="noopener noreferrer">Book now</a>`:`<button class="btn s" data-act="contact" data-id="${p.id}">Book now</button>`;
+// ---------- pages ----------
+async function home(){const r=await api('/providers?city='+S.city+'&limit=6');
+ view(`<div class="hero"><div class="wrap"><h1>Everything your pet needs, all in one place.</h1><p>Discover, compare and book trusted pet services near you.</p>
+<form class="search" data-form="search"><select name="city" aria-label="City">${S.meta.cities.map(c=>`<option value="${c.slug}" ${c.slug===S.city?'selected':''}>${esc(c.name)}</option>`).join('')}</select><input name="q" type="search" placeholder="Search for vets, grooming salons, boarding..." aria-label="Search"><button class="btn">Search</button></form></div></div>
+<div class="wrap"><section><div class="sh"><h2>Explore by category</h2></div><div class="cats">${S.meta.categories.map(c=>`<a class="cat" href="/explore?category=${c.slug}" data-link><b>${CATI[c.slug]||'🐾'}</b><span>${esc(c.name)}</span></a>`).join('')}</div></section>
+<section><div class="sh"><h2>Popular in ${esc(cityName(S.city))}</h2><a class="btn s o" href="/explore" data-link>See all (${r.total})</a></div><div class="grid">${r.items.map(card).join('')||'<p class="mut">No listings in this city yet. Own a pet business here? List it for free.</p>'}</div></section>
+<section><div class="sh"><h2>Compare before you book</h2></div><p class="mut" style="max-width:40em">Compare up to four providers on price, rating, reviews, services and facilities. Ratings come only from Pawprint reviews, and availability is shown only when a provider confirms it.</p></section>
+<section><div class="sh"><h2>Why Pawprint?</h2></div><div class="grid"><div class="card">Compare multiple providers</div><div class="card">Discover services in your city</div><div class="card">Read customer reviews</div><div class="card">Find prices before booking</div><div class="card">Book directly with providers</div></div></section></div>`)}
+async function explore(){const u=new URLSearchParams(location.search);if(!u.get('city'))u.set('city',S.city);if(S.pos&&!u.get('lat')){u.set('lat',S.pos.lat);u.set('lng',S.pos.lng)}
+ const r=await api('/providers?'+u),g=k=>u.get(k)||'',ck=(k,l)=>`<label><input type="checkbox" data-f="${k}" ${g(k)==='1'?'checked':''}>${l}</label>`;
+ const sel=(k,l,o)=>`<select data-f="${k}" aria-label="${l}"><option value="">${l}</option>${o.map(([v,t])=>`<option value="${esc(v)}" ${g(k)===String(v)?'selected':''}>${esc(t)}</option>`).join('')}</select>`;
+ view(`<div class="wrap"><section><div class="sh"><h2>${g('category')?esc(catName(g('category'))):'All services'} in ${esc(cityName(g('city')))}</h2><span class="mut">${r.total} result${r.total===1?'':'s'}</span></div>
+<div class="filters">${sel('category','All categories',S.meta.categories.map(c=>[c.slug,c.name]))}<input type="search" data-f="q" placeholder="Search name, service, area" value="${esc(g('q'))}" aria-label="Search">
+<input type="search" data-f="service" placeholder="Specific service" value="${esc(g('service'))}" aria-label="Specific service">${sel('pet','Any pet',[['Dog','Dogs'],['Cat','Cats']])}${sel('minRating','Any rating',[[3,'3★ & up'],[4,'4★ & up']])}
+<input type="number" min="0" data-f="maxPrice" placeholder="Max ₹" value="${esc(g('maxPrice'))}" aria-label="Max starting price">${ck('open','Open now')}${ck('home','Home service')}${ck('emergency','Emergency')}
+${sel('sort','Recommended',[['rating','Highest rated'],['price_asc','Lowest price'],['price_desc','Highest price'],['nearest','Nearest first']])}<button class="btn s o" data-act="locate">${S.pos?'Location on ✓':'Use my location'}</button></div>
+<div class="grid">${r.items.map(card).join('')||'<div class="card"><h3>No matches</h3><p class="mut">Try removing a filter or choose another city.</p></div>'}</div></section></div>`)}
+async function provider(slug){let p;try{p=await api('/providers/'+slug)}catch(e){return view(`<div class="wrap"><section><div class="card"><h3>Provider not found</h3><a href="/explore" data-link>Browse services</a></div></section></div>`)}
+ const rv=await api(`/providers/${p.id}/reviews?sort=${new URLSearchParams(location.search).get('rs')||'new'}`);const map=p.maps_url;
+ document.title=p.name+' – Pawprint';
+ view(`<div class="wrap"><section><div>${badge(p)}<span class="tag">${esc(catName(p.category))}</span></div><h2 style="margin-top:8px">${esc(p.name)}</h2>
+<p class="mut">${esc([p.address,p.locality,cityName(p.city)].filter(Boolean).join(', '))}</p>
+${p.unverified_source?`<p class="note">Compiled from public web sources and not yet verified by Pawprint. Check details with the provider. <a href="${esc(p.source_url||'#')}" target="_blank" rel="noopener noreferrer">Source</a></p>`:''}
+${p.description?`<p>${esc(p.description)}</p>`:''}
+<p>${p.rating?`★ ${p.rating} (${p.review_count})`:'No reviews yet'} · <b>${price(p)}</b>${p.hours_text?' · '+esc(p.hours_text):''}</p>
+<h3>Services</h3><p>${p.services.map(s=>`<span class="tag">${esc(s)}</span>`).join('')||'<span class="mut">Not listed</span>'}</p>
+<p class="mut">Pets: ${esc(p.pets.join(', '))}${p.home_service?' · Home service':''}${p.emergency?' · Emergency care':''}</p>
+${p.phone?`<p>Phone: <a href="tel:${esc(p.phone.replace(/[^\d+]/g,''))}">${esc(p.phone)}</a></p>`:''}${p.website?`<p><a href="${esc(p.website)}" target="_blank" rel="noopener noreferrer">Website</a></p>`:''}
+<div class="row"><span>${bookBtn(p).replace('btn s','btn').replace('Book now','Book appointment')}</span><a class="btn o" href="${map}" target="_blank" rel="noopener noreferrer">Open in Maps</a><button class="btn o" data-act="fav" data-id="${p.id}">Save</button><button class="btn o" data-act="cmp" data-id="${p.id}" data-name="${esc(p.name)}">Compare</button></div>
+<div class="sh" style="margin-top:28px"><h2>Reviews</h2><select data-rs aria-label="Sort reviews"><option value="new">Newest</option><option value="top" ${new URLSearchParams(location.search).get('rs')==='top'?'selected':''}>Highest rated</option></select></div>
+${rv.map(r=>`<div class="card" style="margin-bottom:8px"><b>${'★'.repeat(r.stars)}</b><span>${esc(r.text)}</span><span class="mut">${esc(r.author)} · ${r.verified?'<span class="tag v">Verified customer</span>':'<span class="tag">Unverified</span>'}</span></div>`).join('')||'<p class="mut">No reviews yet. Be the first.</p>'}
+<form data-form="review" data-id="${p.id}" class="card" style="max-width:520px;margin-top:14px"><b>Write a review</b><div class="f"><label for="rs">Rating</label><select id="rs" name="stars">${[5,4,3,2,1].map(n=>`<option>${n}</option>`).join('')}</select></div><div class="f"><label for="rt">Your review</label><textarea id="rt" name="text" rows="3" maxlength="800"></textarea></div><div class="err" data-err></div><button class="btn s">Submit review</button></form></section></div>`)}
+async function compare(){if(S.cmp.length<2)return view(`<div class="wrap"><section><h2>Compare</h2><p class="mut">Pick at least two providers with “Compare” on any listing (up to four).</p><a class="btn" href="/explore" data-link>Browse services</a></section></div>`);
+ const P=await api('/compare?ids='+S.cmp.map(c=>c.id).join(',')),yn=v=>v?'Yes':'No';
+ const R=[['Rating',p=>p.rating?`★ ${p.rating}`:'No reviews yet'],['Reviews',p=>p.review_count],['Starting price',price],['Location',p=>[p.locality,cityName(p.city)].filter(Boolean).join(', ')],['Services',p=>p.services.join(', ')||'Not listed'],['Pets',p=>p.pets.join(', ')],['Home service',p=>yn(p.home_service)],['Emergency',p=>yn(p.emergency)],['Hours',p=>p.hours_text||'Not listed'],['Status',p=>p.verified?'Verified':'Unverified']];
+ view(`<div class="wrap"><section><div class="sh"><h2>Compare</h2><div class="row">${S.user?'<button class="btn s o" data-act="savecmp">Save this list</button>':''}<button class="btn s o" data-act="clearcmp">Clear</button></div></div><div class="scroll"><table><tr><th></th>${P.map(p=>`<th><a href="/p/${p.slug}" data-link>${esc(p.name)}</a></th>`).join('')}</tr>${R.map(r=>`<tr><th>${r[0]}</th>${P.map(p=>`<td>${esc(r[1](p))}</td>`).join('')}</tr>`).join('')}<tr><th></th>${P.map(p=>`<td>${bookBtn(p)}</td>`).join('')}</tr></table></div></section></div>`)}
+const about=()=>view(`<div class="wrap" style="max-width:640px"><section><h2>About us</h2><p>Pawprint helps pet owners find, compare and choose pet services in Mumbai, Bengaluru, Delhi, Gurugram and Noida, then go to the provider to book. We do not manage appointments or confirm bookings.</p></section></div>`);
+async function account(){if(!S.user)return view(`<div class="wrap" style="max-width:420px"><section><h2>Log in or sign up</h2><form data-form="auth" class="card"><div class="f"><label for="an">Name (sign up only)</label><input id="an" name="name" autocomplete="name"></div><div class="f"><label for="ae">Email</label><input id="ae" name="email" type="email" autocomplete="email"></div><div class="f"><label for="ap">Password (8+ characters)</label><input id="ap" name="password" type="password" autocomplete="current-password"></div><div class="err" data-err></div><div class="row"><button class="btn s" value="login">Log in</button><button class="btn s o" value="register">Sign up</button></div></form></section></div>`);
+ const [pets,fav,rec,cl]=await Promise.all([api('/pets'),api('/favorites'),api('/recent'),api('/comparisons')]);
+ view(`<div class="wrap"><section><div class="sh"><h2>Hi, ${esc(S.user.name)}</h2><button class="btn s o" data-act="logout">Log out</button></div>
+<h3>My pets</h3><div class="grid" style="margin:10px 0 16px">${pets.map(p=>`<div class="card"><b>${esc(p.name)}</b><span class="mut">${esc(p.type)} · ${esc(p.breed||'Breed not set')}${p.age!=null?' · '+p.age+' yrs':''}${p.gender?' · '+p.gender:''}</span>${p.preferences?`<span class="mut">${esc(p.preferences)}</span>`:''}<button class="btn s o" data-act="rmpet" data-id="${p.id}">Remove</button></div>`).join('')||'<p class="mut">No pets yet.</p>'}</div>
+<form data-form="pet" class="card" style="max-width:440px"><b>Add a pet</b><div class="f"><label for="pn">Name</label><input id="pn" name="name"></div><div class="f"><label for="pt">Type</label><select id="pt" name="type"><option>Dog</option><option>Cat</option><option>Other</option></select></div><div class="f"><label for="pb">Breed</label><input id="pb" name="breed"></div><div class="f"><label for="pa">Age (years)</label><input id="pa" name="age" type="number" min="0" max="40" step="0.5"></div><div class="f"><label for="pg">Gender (optional)</label><select id="pg" name="gender"><option value="">–</option><option>Male</option><option>Female</option></select></div><div class="f"><label for="pp">Preferences</label><input id="pp" name="preferences"></div><div class="err" data-err></div><button class="btn s">Save pet</button></form>
+<h3 style="margin-top:24px">Saved providers</h3><div class="grid" style="margin-top:10px">${fav.map(card).join('')||'<p class="mut">Nothing saved yet.</p>'}</div>
+<h3 style="margin-top:24px">Saved comparisons</h3><div class="grid" style="margin-top:10px">${cl.map(c=>`<div class="card"><b>${esc(c.name)}</b><span class="mut">${c.provider_ids.length} providers</span><button class="btn s" data-act="loadcmp" data-ids="${c.provider_ids.join(',')}">Open</button></div>`).join('')||'<p class="mut">None yet.</p>'}</div>
+<h3 style="margin-top:24px">Recently visited</h3><div class="grid" style="margin-top:10px">${rec.map(card).join('')||'<p class="mut">Nothing yet.</p>'}</div></section></div>`)}
+const biz=()=>view(`<div class="wrap" style="max-width:600px"><section><h2>List your business</h2><p class="mut">Submissions are reviewed by an admin before they go live. Provide credentials for veterinary services; we will not label anyone a verified veterinarian without checking.</p>
+<form data-form="biz">${[['name','Business name','text'],['locality','Locality','text'],['address','Full address','text'],['phone','Contact number','tel'],['email','Email','email'],['website','Website (optional)','url'],['booking_url','Booking URL (optional)','url'],['services','Services offered (comma separated)','text'],['starting_price','Starting price in ₹ (optional)','number'],['hours_text','Opening hours','text'],['credentials','Registration or professional credentials','text']].map(([n,l,t])=>`<div class="f"><label for="b_${n}">${l}</label><input id="b_${n}" name="${n}" type="${t}"></div>`).join('')}
+<div class="f"><label for="b_category">Category</label><select id="b_category" name="category">${S.meta.categories.map(c=>`<option value="${c.slug}">${esc(c.name)}</option>`).join('')}</select></div>
+<div class="f"><label for="b_city">City</label><select id="b_city" name="city">${S.meta.cities.map(c=>`<option value="${c.slug}">${esc(c.name)}</option>`).join('')}</select></div>
+<div class="f"><label for="b_description">Description</label><textarea id="b_description" name="description" rows="3"></textarea></div><div class="err" data-err></div><button class="btn">Submit for review</button></form></section></div>`);
+async function adminPage(){if(S.user?.role!=='admin')return view('<div class="wrap"><section><h2>Admin</h2><p>Admin access required.</p></section></div>');
+ const [st,sub,pr,rv,cl,us]=await Promise.all(['/admin/stats','/admin/submissions','/admin/providers','/admin/reviews','/admin/clicks','/admin/users'].map(p=>api(p)));
+ view(`<div class="wrap"><section><h2>Admin dashboard</h2><p class="mut">${st.providers} providers · ${st.users} users · ${st.clicks} referral clicks · ${st.pendingSubmissions} pending listings · ${st.pendingReviews} reviews awaiting moderation</p>
+<h3 style="margin-top:20px">Pending registrations</h3><div class="grid" style="margin-top:10px">${sub.map(s=>`<div class="card"><b>${esc(s.data.name)}</b><span class="mut">${esc(s.data.locality)}, ${esc(cityName(s.data.city))} · ${esc(s.data.email)}</span><span class="mut">Credentials: ${esc(s.data.credentials||'none provided')}</span><div class="row"><button class="btn s" data-act="appr" data-id="${s.id}">Approve</button><button class="btn s o" data-act="rej" data-id="${s.id}">Reject</button></div></div>`).join('')||'<p class="mut">None waiting.</p>'}</div>
+<h3 style="margin-top:20px">Providers</h3><div class="scroll"><table><tr><th>Name</th><th>Booking URL</th><th>Verified</th><th>Visible</th><th>Clicks</th><th></th></tr>${pr.map(p=>`<tr><td>${esc(p.name)}<br><span class="mut">${esc(cityName(p.city))}</span></td><td><input aria-label="Booking URL for ${esc(p.name)}" style="width:100%;min-width:180px;padding:6px" value="${esc(p.booking_url||'')}" data-url="${p.id}"></td><td><input type="checkbox" aria-label="Verified" data-ver="${p.id}" ${p.verified?'checked':''}></td><td><input type="checkbox" aria-label="Visible" data-vis="${p.id}" ${p.status==='active'?'checked':''}></td><td>${p.clicks}</td><td><button class="btn s o" data-act="delprov" data-id="${p.id}">Delete</button></td></tr>`).join('')}</table></div>
+<h3 style="margin-top:20px">Reviews</h3>${rv.map(r=>`<div class="card" style="margin-bottom:8px"><span>${'★'.repeat(r.stars)} ${esc(r.text)} <span class="tag ${r.status==='pending'?'w':''}">${r.status}</span></span><span class="mut">${esc(r.author)} on ${esc(r.provider)}</span><div class="row"><button class="btn s" data-act="rvs" data-id="${r.id}" data-s="published">Publish</button><button class="btn s o" data-act="rvs" data-id="${r.id}" data-s="published" data-v="1">Publish as verified</button><button class="btn s o" data-act="rvs" data-id="${r.id}" data-s="removed">Remove</button></div></div>`).join('')||'<p class="mut">No reviews.</p>'}
+<h3 style="margin-top:20px">Referral clicks</h3><div class="scroll"><table><tr><th>Provider</th><th>Clicks</th><th>Redirects</th></tr>${cl.map(c=>`<tr><td>${esc(c.name)}</td><td>${c.clicks}</td><td>${c.redirects||0}</td></tr>`).join('')||'<tr><td colspan="3" class="mut">No clicks yet.</td></tr>'}</table></div>
+<h3 style="margin-top:20px">Users</h3><div class="scroll"><table><tr><th>Name</th><th>Email</th><th>Role</th></tr>${us.map(u=>`<tr><td>${esc(u.name)}</td><td>${esc(u.email)}</td><td>${u.role} ${u.id!==S.user.id?`<button class="btn s o" data-act="role" data-id="${u.id}" data-r="${u.role==='admin'?'user':'admin'}">Make ${u.role==='admin'?'user':'admin'}</button>`:''}</td></tr>`).join('')}</table></div></section></div>`)}
+// ---------- router ----------
+async function route(){nav();bar();document.title='Pawprint – Discover, compare and book pet services';const p=location.pathname;loading();
+ try{if(p==='/')await home();else if(p==='/explore')await explore();else if(p.startsWith('/p/'))await provider(p.slice(3));else if(p==='/compare')await compare();else if(p==='/about')about();else if(p==='/account')await account();else if(p==='/list-your-business')biz();else if(p==='/admin')await adminPage();else view('<div class="wrap"><section><h2>Page not found</h2><a href="/" data-link>Go home</a></section></div>');
+ const c=new URLSearchParams(location.search).get('contact');if(c)contact(c)}catch(e){errView(e.message)}}
+function modal(h){$('#sheet').innerHTML='<button class="x" aria-label="Close" data-act="close">×</button>'+h;$('#modal').classList.add('on')}
+async function contact(id){try{const c=await api('/providers/'+id+'/contact');modal(`<h2>${esc(c.name)}</h2><p>This provider has no booking page on file.</p>${c.phone?`<p>Call: <a href="tel:${esc(c.phone.replace(/[^\d+]/g,''))}">${esc(c.phone)}</a></p>`:'<p class="mut">No contact number on file yet.</p>'}${c.maps_url?`<p><a href="${esc(c.maps_url)}" target="_blank" rel="noopener noreferrer">Find on Google Maps</a></p>`:''}${c.address?`<p class="mut">${esc(c.address)}</p>`:''}<p class="note">Pawprint does not confirm appointments. Arrange your booking directly with the provider.</p>`)}catch(e){toast(e.message)}}
+const needLogin=()=>{if(S.user)return false;toast('Please log in first');go('/account');return true};
+document.addEventListener('click',async e=>{const l=e.target.closest('a[data-link]');if(l&&!e.metaKey&&!e.ctrlKey){e.preventDefault();return go(l.getAttribute('href'))}
+ if(e.target.id==='modal'){$('#modal').classList.remove('on');return}
+ const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act,id=b.dataset.id;
+ try{if(a==='close')$('#modal').classList.remove('on');
+ else if(a==='reload')route();
+ else if(a==='cmp'){const i=S.cmp.findIndex(c=>c.id==id);if(i>-1)S.cmp.splice(i,1);else if(S.cmp.length>=4)return toast('Compare up to 4 at a time');else S.cmp.push({id:+id,name:b.dataset.name});saveCmp();route()}
+ else if(a==='clearcmp'){S.cmp=[];saveCmp();route()}
+ else if(a==='contact')contact(id);
+ else if(a==='locate'){navigator.geolocation?navigator.geolocation.getCurrentPosition(p=>{S.pos={lat:p.coords.latitude,lng:p.coords.longitude};route()},()=>toast('Location permission was denied.')):toast('Location is not available.')}
+ else if(a==='fav'){if(needLogin())return;await api('/favorites/'+id,{method:'PUT'});toast('Saved')}
+ else if(a==='logout'){localStorage.removeItem('pp_token');S.user=null;route()}
+ else if(a==='rmpet'){await api('/pets/'+id,{method:'DELETE'});route()}
+ else if(a==='savecmp'){const n=prompt('Name this comparison');if(n){await api('/comparisons',{method:'POST',body:{name:n,provider_ids:S.cmp.map(c=>c.id)}});toast('Comparison saved')}}
+ else if(a==='loadcmp'){S.cmp=b.dataset.ids.split(',').map(x=>({id:+x}));saveCmp();go('/compare')}
+ else if(a==='appr'){await api(`/admin/submissions/${id}/approve`,{method:'POST'});toast('Approved and published');route()}
+ else if(a==='rej'){await api(`/admin/submissions/${id}/reject`,{method:'POST'});route()}
+ else if(a==='rvs'){await api('/admin/reviews/'+id,{method:'PUT',body:{status:b.dataset.s,verified:!!b.dataset.v}});route()}
+ else if(a==='role'){await api(`/admin/users/${id}/role`,{method:'PUT',body:{role:b.dataset.r}});route()}
+ else if(a==='delprov'&&confirm('Delete this provider permanently?')){await api('/admin/providers/'+id,{method:'DELETE'});route()}
+ }catch(err){toast(err.message)}});
+document.addEventListener('change',async e=>{const t=e.target;
+ if(t.matches('[data-city]')){S.city=t.value;localStorage.setItem('pp_city',t.value);const u=new URLSearchParams(location.search);if(location.pathname==='/explore'){u.set('city',t.value);go('/explore?'+u)}else route()}
+ else if(t.matches('[data-f]')){const u=new URLSearchParams(location.search);const v=t.type==='checkbox'?(t.checked?'1':''):t.value;v?u.set(t.dataset.f,v):u.delete(t.dataset.f);go('/explore?'+u)}
+ else if(t.matches('[data-rs]')){go(location.pathname+'?rs='+t.value)}
+ else if(t.matches('[data-url]')||t.matches('[data-ver]')||t.matches('[data-vis]')){const id=t.dataset.url||t.dataset.ver||t.dataset.vis;const body=t.matches('[data-url]')?{booking_url:t.value.trim()}:t.matches('[data-ver]')?{verified:t.checked}:{status:t.checked?'active':'hidden'};
+  try{await api('/admin/providers/'+id,{method:'PUT',body});toast('Updated')}catch(err){toast(err.message)}}});
+document.addEventListener('submit',async e=>{const f=e.target.closest('form[data-form]');if(!f)return;e.preventDefault();const k=f.dataset.form,d=Object.fromEntries(new FormData(f)),er=f.querySelector('[data-err]');if(er)er.textContent='';
+ try{if(k==='search'){S.city=d.city;localStorage.setItem('pp_city',d.city);go('/explore?'+new URLSearchParams({city:d.city,...(d.q?{q:d.q}:{})}))}
+ else if(k==='auth'){const m=(e.submitter?.value)||'login',r=await api('/auth/'+m,{method:'POST',body:d});localStorage.setItem('pp_token',r.token);S.user=r.user;route()}
+ else if(k==='pet'){await api('/pets',{method:'POST',body:d});route()}
+ else if(k==='review'){if(needLogin())return;const r=await api(`/providers/${f.dataset.id}/reviews`,{method:'POST',body:d});toast(r.message);route()}
+ else if(k==='biz'){d.services=(d.services||'').split(',').map(s=>s.trim()).filter(Boolean);const r=await api('/submissions',{method:'POST',body:d});toast(r.message);go('/')}
+ }catch(err){if(er)er.textContent=err.message;else toast(err.message)}});
+addEventListener('popstate',route);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')$('#modal').classList.remove('on')});
+(async()=>{try{S.meta=await api('/meta');if(TOK())S.user=await api('/me').catch(()=>null);if(!S.meta.cities.some(c=>c.slug===S.city))S.city=S.meta.cities[0]?.slug}catch(e){return errView(e.message)}route()})();
+</script>
+</body></html>
