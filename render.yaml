@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: pawprint
+    runtime: node
+    plan: starter            # persistent disks need a paid plan; "free" works but data resets on every deploy
+    buildCommand: npm install
+    startCommand: npm run seed && npm start
+    healthCheckPath: /api/meta
+    disk:
+      name: pawprint-data
+      mountPath: /opt/render/project/src/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: BASE_URL
+        sync: false          # e.g. https://pawprint.onrender.com
